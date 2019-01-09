@@ -104,6 +104,11 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
         }
         
         do {
+            try AVAudioSession.sharedInstance().overrideOutputAudioPort(AVAudioSession.PortOverride.speaker)
+        } catch _ {
+        }
+        
+        do {
             try audioEngine.start()
         } catch {
             showAlert(Alerts.AudioEngineError, message: String(describing: error))
